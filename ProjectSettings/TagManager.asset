@@ -6,6 +6,7 @@ TagManager:
   tags:
   - backPoint
   - bullet
+  - coin
   layers:
   - Default
   - TransparentFX

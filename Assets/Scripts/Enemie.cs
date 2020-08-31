@@ -35,10 +35,13 @@ public class Enemie : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.gameObject.tag =="bullet")
-        {
+        {   
+            
+            GameController.current.AddScore(10);
             anim.SetTrigger("destroy");
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 0.5f);
         }
 
     }
+
 }

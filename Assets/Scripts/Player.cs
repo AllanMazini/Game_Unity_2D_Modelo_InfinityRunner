@@ -55,4 +55,18 @@ public class Player : MonoBehaviour
             smoke.SetActive(false);
         }
     }
+
+
+   private void OnTriggerEnter2D(Collider2D colision)
+   {
+       if(colision.gameObject.tag == "coin"){
+           GameController.current.AddScore(5);
+           Destroy(colision.gameObject);
+
+           
+           }
+    }
+
+    
+   
 }
