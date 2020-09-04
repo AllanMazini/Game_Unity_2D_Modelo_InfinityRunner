@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class Player : MonoBehaviour
     public Transform firePoint; // VARIAVEL DO PONTO DE SAIDA DA BALA
 
     public GameObject smoke; // VARIAVEL DA ATIVACAO DA FUMACA DO PULO
-    
+
     private Rigidbody2D rig; // VARIAVEL DE REFERENCIA
 
     // Start is called before the first frame update
@@ -31,42 +32,69 @@ public class Player : MonoBehaviour
         //BOTAO DE PULO DO PLAYER
         if (Input.GetKeyDown(KeyCode.Space) && !isJump)
         {
-            rig.AddForce(Vector2.up * JumpForca,ForceMode2D.Impulse); //PULO
+            rig.AddForce(Vector2.up * JumpForca, ForceMode2D.Impulse); //PULO
             isJump = true; // SE ESTRA NO CHAO
             smoke.SetActive(true); // ATIVADOR DA FUMACA
 
         }
 
         //BOTAO DE TIRO
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Instantiate(bullet, firePoint.position, firePoint.rotation); // REFERENCIANDO A BALA E O PONTO DE SAIDA DA BALA
         }
 
     }
 
-    // COLISAO IF SE O PERSONAGEM ESTA NO CHAO, FAZ COM QUE O PERSONAGEM PULE SO UMA VEZ
-    void OnCollisionEnter2D(Collision2D collision) 
-    {   
+    public void JumpBtn()
+    {
 
-        if(collision.gameObject.layer == 8)
+        if (!isJump)
         {
-            isJump =false;
+            rig.AddForce(Vector2.up * JumpForca, ForceMode2D.Impulse); //PULO
+            isJump = true; // SE ESTRA NO CHAO
+            smoke.SetActive(true); // ATIVADOR DA FUMACA
+
+        }
+
+    }
+    public void FireBtn()
+    {
+        Instantiate(bullet, firePoint.position, firePoint.rotation);
+    }
+
+    // COLISAO IF SE O PERSONAGEM ESTA NO CHAO, FAZ COM QUE O PERSONAGEM PULE SO UMA VEZ
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.layer == 8)
+        {
+            isJump = false;
             smoke.SetActive(false);
+        }
+
+
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D colision)
+    {
+        if (colision.gameObject.tag == "coin")
+        {
+            GameController.current.AddScore(5);
+            Destroy(colision.gameObject);
+        }
+
+        if (colision.gameObject.tag == "Enemy")
+        {
+
+            GameController.current.PainelGameOver.SetActive(true);
+            GameController.current.PlayerIsAlive = false;
+            Destroy(gameObject);
+
         }
     }
 
 
-   private void OnTriggerEnter2D(Collider2D colision)
-   {
-       if(colision.gameObject.tag == "coin"){
-           GameController.current.AddScore(5);
-           Destroy(colision.gameObject);
 
-           
-           }
-    }
-
-    
-   
 }
