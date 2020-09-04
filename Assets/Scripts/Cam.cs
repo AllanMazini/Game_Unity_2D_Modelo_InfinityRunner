@@ -8,19 +8,22 @@ public class Cam : MonoBehaviour
     public float Speed; // VELOCIDADE DA CAMERA
 
     void Start()
-    {
+    {   
+        
         player = GameObject.FindGameObjectWithTag("Player"); // REFERENCIANDO O PLAYER PELA TAG
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        // CRUANDO POSICAO E MOVIMENTACAO DA CAMERA COM PLAYER
-        Vector3 newPosition=  new Vector3(player.transform.position.x + 5.8f, transform.position.y, transform.position.z); // POSICAO DE INICIO
-        transform.position = Vector3.Lerp(transform.position, newPosition, Speed * Time.deltaTime); //MOVIMENTACAO DA CAMERA    
-        
-           
+    {
+        if (GameController.current.PlayerIsAlive) 
+        {
+            // CRUANDO POSICAO E MOVIMENTACAO DA CAMERA COM PLAYER
+            Vector3 newPosition = new Vector3(player.transform.position.x + 5.8f, transform.position.y, transform.position.z); // POSICAO DE INICIO
+            transform.position = Vector3.Lerp(transform.position, newPosition, Speed * Time.deltaTime); //MOVIMENTACAO DA CAMERA    
+
+        }
+    
     }
 
 }
- 

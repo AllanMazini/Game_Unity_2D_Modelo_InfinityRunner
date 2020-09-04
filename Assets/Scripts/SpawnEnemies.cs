@@ -20,6 +20,7 @@ public class SpawnEnemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
+        if(GameController.current.PlayerIsAlive){
         timeCount += Time.deltaTime;
 
         if (timeCount >= inicialTime)
@@ -30,5 +31,5 @@ public class SpawnEnemies : MonoBehaviour
             timeCount = 0;
         }
 
-    }
+     } }
 }

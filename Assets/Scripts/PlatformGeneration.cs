@@ -12,23 +12,28 @@ public class PlatformGeneration : MonoBehaviour
     private float platformWight; //REFERENCIANDO O COLIDER
 
     void Start()
-    {   
+    {
         // REFERENCIANDO A PLATFORM COM DOIS TIPOS E COLLDER
         if (Platform.GetComponent<BoxCollider2D>())
-        {   
+        {
             platformWight = Platform.GetComponent<BoxCollider2D>().size.x;
-        }else{
+        }
+        else
+        {
             platformWight = Platform.GetComponent<PolygonCollider2D>().bounds.size.x;
         }
     }
     void Update()
-    {   
-        //CRIACAO DA PLATAFORM INFINITA
-        if (transform.position.x < point.position.x)
+    {
+        if (GameController.current.PlayerIsAlive)
         {
-            float Distace = Random.Range(distMin,disMax);
-            transform.position = new Vector3(transform.position.x + platformWight + Distace, transform.position.y, transform.position.z);
-            Instantiate(Platform, transform.position, transform.rotation);
+            //CRIACAO DA PLATAFORM INFINITA
+            if (transform.position.x < point.position.x)
+            {
+                float Distace = Random.Range(distMin, disMax);
+                transform.position = new Vector3(transform.position.x + platformWight + Distace, transform.position.y, transform.position.z);
+                Instantiate(Platform, transform.position, transform.rotation);
+            }
         }
     }
 }

@@ -22,14 +22,19 @@ public class Enemie : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
+        if (GameController.current.PlayerIsAlive)
+        {
         //transform.Translate(Vector2.left * Speed * Time.deltaTime);
         rig.velocity = new Vector2 (-Speed * Time.deltaTime, rig.velocity.y);
 
-         if (transform.position.x < backPoint.position.x)
-        {
-            Destroy(gameObject);
+            if (transform.position.x < backPoint.position.x)
+            {
+                Destroy(gameObject);
+            }
+            
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision) 
