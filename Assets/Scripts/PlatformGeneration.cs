@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class PlatformGeneration : MonoBehaviour
     public float disMax;// DISTANCIA MAXIMA DE CRIACAO
 
     private float platformWight; //REFERENCIANDO O COLIDER
+
 
     void Start()
     {
@@ -30,8 +32,9 @@ public class PlatformGeneration : MonoBehaviour
             //CRIACAO DA PLATAFORM INFINITA
             if (transform.position.x < point.position.x)
             {
+
                 float Distace = Random.Range(distMin, disMax);
-                transform.position = new Vector3(transform.position.x + platformWight + Distace, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x + platformWight + Distace, Random.Range(-4.5f,-3f), transform.position.z);
                 Instantiate(Platform, transform.position, transform.rotation);
             }
         }

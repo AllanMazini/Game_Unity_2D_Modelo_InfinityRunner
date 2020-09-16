@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
             smoke.SetActive(true); // ATIVADOR DA FUMACA
 
         }
+        
 
         //BOTAO DE TIRO
         if (Input.GetKeyDown(KeyCode.P))
