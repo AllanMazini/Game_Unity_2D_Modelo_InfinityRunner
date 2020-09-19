@@ -41,7 +41,7 @@ public class Enemie : MonoBehaviour
     {
         if (collision.gameObject.tag =="bullet")
         {   
-            
+            AudioContrloller.current.PlayClip(AudioContrloller.current.fx3);
             GameController.current.AddScore(10);
             anim.SetTrigger("destroy");
             Destroy(gameObject, 0.5f);

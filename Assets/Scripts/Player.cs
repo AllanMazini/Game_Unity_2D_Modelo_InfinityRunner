@@ -17,10 +17,14 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rig; // VARIAVEL DE REFERENCIA
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody2D>(); // REFERENCIA O RIGIDBODY
+
+        AudioContrloller.current.PlayClip(AudioContrloller.current.bg);
     }
 
     // Update is called once per frame
@@ -55,6 +59,7 @@ public class Player : MonoBehaviour
             rig.AddForce(Vector2.up * JumpForca, ForceMode2D.Impulse); //PULO
             isJump = true; // SE ESTRA NO CHAO
             smoke.SetActive(true); // ATIVADOR DA FUMACA
+            AudioContrloller.current.PlayClip(AudioContrloller.current.fx1);
 
         }
 
@@ -62,6 +67,7 @@ public class Player : MonoBehaviour
     public void FireBtn()
     {
         Instantiate(bullet, firePoint.position, firePoint.rotation);
+        AudioContrloller.current.PlayClip(AudioContrloller.current.fx2);
     }
 
     // COLISAO IF SE O PERSONAGEM ESTA NO CHAO, FAZ COM QUE O PERSONAGEM PULE SO UMA VEZ
@@ -92,6 +98,7 @@ public class Player : MonoBehaviour
             GameController.current.PainelGameOver.SetActive(true);
             GameController.current.PlayerIsAlive = false;
             Destroy(gameObject);
+           
 
         }
     }
